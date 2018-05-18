@@ -1,0 +1,139 @@
+<script language="JavaScript">
+<!--
+function submitForm()
+{
+    document.payment.submit();
+}
+
+//-->
+</script>
+<h2>Checkout :: Payment </h2>
+<form method="post" action="[% c.uri_for(
+    c.controller('Checkout').action_for('payment') 
+) %]" name='payment'>
+<input type='hidden' name="payment_amount" value="[% amount %]" />
+
+<table width='540' cellpadding='0' cellspacing='0' valign='top' border='0' id="customer_info">
+  <tr>
+    <td colspan="2">
+    <div align="center">
+      1. CUSTOMER&nbsp;&nbsp;
+      2. SHIPPING&nbsp;&nbsp;
+      <font color='#990000'><b>3. PAYMENT</b></font>&nbsp;&nbsp;
+      4. CONFIRMATION
+    </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="right">
+      <input type='submit' name='submit' value='Continue Checkout'
+        onClick="submitForm()"  >
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+                  <table border=0 width='100%'>
+                    <tr>
+                      <th>BILL TO:</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td colspan=2>
+                      [% customer.bill_first_name %],
+                      [% customer.bill_last_name %]<br />
+                      [% customer.bill_address1 %]<br />
+                      [% customer.bill_address2 %]<br />
+                      [% customer.bill_city %], [% customer.bill_state %]
+                      [% customer.bill_zip %]<br />
+                      [% customer.bill_country %]<br />
+                      [% customer.bill_phone %]<br />
+                      [% customer.bill_email %]<br />
+                      </td>
+                    </tr>
+                  </table>
+<br>
+                  <table border=0 width='100%'>
+                    <tr>
+                      <th>SHIP TO:</td>
+                      <td align='right' valign='top'>&nbsp; </td>
+                  </tr>
+                    <td colspan=2>
+                    [% customer.ship_first_name %],
+                    [% customer.ship_last_name %]<br />
+                    [% customer.ship_address1 %]<br />
+                    [% customer.ship_address2 %]<br />
+                    [% customer.ship_city %], [% customer.bill_state %]
+                    [% customer.ship_zip %]<br />
+                    [% customer.ship_country %]<br />
+                    [% customer.ship_phone %]<br />
+                    [% customer.ship_email %]<br />
+                    </td>
+              </tr>
+          </table>
+
+    </td>
+    <!-- RIGHT COLUMN -->
+    <td valign="top">
+
+
+    CHOOSE PAYMENT METHOD:<br>
+    <table cellpadding='0' cellspacing='5' valign='top' align='left' border='0' width='100%'>
+      <!-- CELL: SHIPPING METHOD -->
+      <tr>
+        <th class='summarycell'>
+        AMOUNT: $[% amount | format('%0.2f') %]<br><br>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        Please select a payment type:
+<br>
+<br>
+<input type="radio" name="payment_type" value="CC"> Credit Card
+<table border=0>
+<tr>
+    <td> [% form.render_field('credit_card_number') %] </td>
+</tr>
+<tr>
+    <td> [% form.render_field('credit_card_expiration') %] </td>
+</tr>
+<tr>
+    <td>[% form.render_field('credit_card_cvv') %] </td>
+</tr>
+</table>
+
+<br>
+<br>
+<input type="radio" name="payment_type" value="PayPal"> Paypal
+<table border=0>
+<tr>
+    <td colspan="2"> [% form.render_field('paypal_email') %] </td>
+</tr>
+</table>
+      </td>
+    </tr>
+  </table>
+
+
+
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="right">
+      <input type='submit' name='submit' value='Continue Checkout'
+        onClick="submitForm()"  >
+    </td>
+  </tr>
+<tr>
+  <td  colspan="2" align="center">
+[% INCLUDE cart/checkout_view.tt2 %]
+  </td>
+</tr>
+
+</table>
+
+
+</form>
+
+<br>
